@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101827">
+<title>Pocket PC</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;color:#fff;background:#101827}
+.desktop{height:100%;position:relative;background:radial-gradient(ellipse at 50% 45%,#244b70 0,#172d4a 38%,#101827 78%);overflow:hidden}
+.glow{position:absolute;width:65vw;height:65vw;border-radius:50%;background:#2686c9;filter:blur(100px);opacity:.18;left:15%;top:12%}
+.brand{position:absolute;top:22px;left:24px;font-size:14px;letter-spacing:2px;color:#d7eaff}
+.icons{position:absolute;top:72px;left:20px;display:grid;gap:22px}
+.icon{width:76px;text-align:center;font-size:12px;color:#f2f7ff;text-shadow:0 1px 5px #000}
+.icon span{display:block;font-size:30px;margin-bottom:5px}
+.center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.welcome{text-align:center;text-shadow:0 3px 20px #0006}
+.welcome h1{font-weight:300;font-size:clamp(34px,7vw,64px);margin:0 0 8px}
+.welcome p{color:#c5d8eb;margin:0;font-size:14px}
+.taskbar{position:absolute;bottom:0;left:0;right:0;height:58px;background:#111c2bd9;backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;gap:12px;border-top:1px solid #ffffff20}
+.start{border:0;background:#ffffff18;color:white;border-radius:12px;width:42px;height:42px;font-size:22px}
+.search{height:38px;width:min(36vw,230px);border:1px solid #ffffff24;background:#ffffff12;color:#dcecff;border-radius:20px;padding:0 14px;outline:none}
+.taskicon{border:0;background:#ffffff12;color:white;border-radius:10px;width:38px;height:38px;font-size:18px}
+.clock{position:absolute;right:14px;text-align:right;font-size:11px;color:#e5f1ff;line-height:1.4}
+.panel{display:none;position:absolute;bottom:68px;left:50%;transform:translateX(-50%);width:min(92vw,390px);padding:18px;border:1px solid #ffffff28;border-radius:18px;background:#172638ed;backdrop-filter:blur(20px);box-shadow:0 15px 50px #0008}
+.panel h2{font-weight:500;margin:0 0 14px;font-size:18px}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.app{padding:14px 6px;border-radius:12px;background:#ffffff10;text-align:center;font-size:12px}
+.app b{display:block;font-size:24px;margin-bottom:6px}
+.toast{position:absolute;top:20px;right:18px;background:#172638ed;padding:10px 14px;border-radius:12px;font-size:12px;display:none}
+@media(max-width:420px){.icons{left:10px}.icon{width:64px}.clock{display:none}.taskbar{gap:7px}}
+</style>
+</head>
+<body>
+<div class="desktop">
+<div class="glow"></div>
+<div class="brand">POCKET PC <small style="opacity:.6"> • PREVIEW 0.1</small></div>
+<div class="icons">
+  <div class="icon" onclick="notify('This PC is part of the desktop preview.')"><span>🖥️</span>This PC</div>
+  <div class="icon" onclick="notify('File Explorer module is planned for the next phase.')"><span>📁</span>Files</div>
+  <div class="icon" onclick="notify('Settings module is coming in a later phase.')"><span>⚙️</span>Settings</div>
+  <div class="icon" onclick="notify('Terminal module is planned for a later phase.')"><span>⌨️</span>Terminal</div>
+</div>
+<div class="center"><div class="welcome"><h1>Welcome</h1><p>Your pocket-sized desktop experience</p></div></div>
+<div id="startPanel" class="panel">
+  <h2>Start</h2>
+  <div class="apps">
+    <div class="app" onclick="notify('File Explorer is not connected yet.')"><b>📁</b>Explorer</div>
+    <div class="app" onclick="notify('Terminal is not connected yet.')"><b>⌨️</b>Terminal</div>
+    <div class="app" onclick="notify('Settings are coming soon.')"><b>⚙️</b>Settings</div>
+    <div class="app" onclick="notify('App launcher module is coming soon.')"><b>🧩</b>Apps</div>
+    <div class="app" onclick="notify('This preview does not run Windows EXE files.')"><b>💿</b>Install EXE</div>
+    <div class="app" onclick="notify('Power controls are simulated in this preview.')"><b>⏻</b>Power</div>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+<div class="taskbar">
+  <button class="start" onclick="toggleStart()" aria-label="Start">⊞</button>
+  <input class="search" placeholder="Search" readonly onclick="notify('Search will be added in a later phase.')">
+  <button class="taskicon" onclick="notify('File Explorer is coming soon.')">📁</button>
+  <button class="taskicon" onclick="notify('Browser shortcut placeholder.')">🌐</button>
+  <div class="clock"><span id="time">--:--</span><br><span id="date">--</span></div>
+</div>
+</div>
+<script>
+function toggleStart(){const p=document.getElementById('startPanel');p.style.display=p.style.display==='block'?'none':'block'}
+function notify(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2300)}
+function updateClock(){const d=new Date();document.getElementById('time').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=d.toLocaleDateString()}
+updateClock();setInterval(updateClock,1000);
+document.addEventListener('click',e=>{if(!e.target.closest('.start')&&!e.target.closest('#startPanel'))document.getElementById('startPanel').style.display='none'});
+</script>
+</body>
+</html>
