@@ -6,68 +6,93 @@
 <meta name="theme-color" content="#101827">
 <title>Pocket PC</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;color:#fff;background:#101827}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;color:#fff;background:#101827;touch-action:manipulation}
 .desktop{height:100%;position:relative;background:radial-gradient(ellipse at 50% 45%,#244b70 0,#172d4a 38%,#101827 78%);overflow:hidden}
-.glow{position:absolute;width:65vw;height:65vw;border-radius:50%;background:#2686c9;filter:blur(100px);opacity:.18;left:15%;top:12%}
-.brand{position:absolute;top:22px;left:24px;font-size:14px;letter-spacing:2px;color:#d7eaff}
-.icons{position:absolute;top:72px;left:20px;display:grid;gap:22px}
-.icon{width:76px;text-align:center;font-size:12px;color:#f2f7ff;text-shadow:0 1px 5px #000}
-.icon span{display:block;font-size:30px;margin-bottom:5px}
+.glow{position:absolute;width:65vw;height:65vw;border-radius:50%;background:#2686c9;filter:blur(100px);opacity:.18;left:15%;top:12%;pointer-events:none}
+.brand{position:absolute;top:20px;left:22px;font-size:13px;letter-spacing:2px;color:#d7eaff}
+.icons{position:absolute;top:70px;left:16px;display:grid;gap:17px}
+.icon{width:72px;text-align:center;font-size:11px;color:#f2f7ff;text-shadow:0 1px 5px #000}
+.icon span{display:block;font-size:29px;margin-bottom:4px}
 .center{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
 .welcome{text-align:center;text-shadow:0 3px 20px #0006}
-.welcome h1{font-weight:300;font-size:clamp(34px,7vw,64px);margin:0 0 8px}
-.welcome p{color:#c5d8eb;margin:0;font-size:14px}
-.taskbar{position:absolute;bottom:0;left:0;right:0;height:58px;background:#111c2bd9;backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;gap:12px;border-top:1px solid #ffffff20}
-.start{border:0;background:#ffffff18;color:white;border-radius:12px;width:42px;height:42px;font-size:22px}
-.search{height:38px;width:min(36vw,230px);border:1px solid #ffffff24;background:#ffffff12;color:#dcecff;border-radius:20px;padding:0 14px;outline:none}
-.taskicon{border:0;background:#ffffff12;color:white;border-radius:10px;width:38px;height:38px;font-size:18px}
-.clock{position:absolute;right:14px;text-align:right;font-size:11px;color:#e5f1ff;line-height:1.4}
-.panel{display:none;position:absolute;bottom:68px;left:50%;transform:translateX(-50%);width:min(92vw,390px);padding:18px;border:1px solid #ffffff28;border-radius:18px;background:#172638ed;backdrop-filter:blur(20px);box-shadow:0 15px 50px #0008}
-.panel h2{font-weight:500;margin:0 0 14px;font-size:18px}
-.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.app{padding:14px 6px;border-radius:12px;background:#ffffff10;text-align:center;font-size:12px}
+.welcome h1{font-weight:300;font-size:clamp(32px,7vw,62px);margin:0 0 8px}
+.welcome p{color:#c5d8eb;margin:0;font-size:13px}
+.taskbar{position:absolute;bottom:0;left:0;right:0;height:58px;background:#111c2bd9;backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;gap:9px;border-top:1px solid #ffffff20}
+button{cursor:pointer}.start,.taskicon{border:0;background:#ffffff18;color:white;border-radius:11px;width:40px;height:40px;font-size:19px}
+.search{height:36px;width:min(30vw,190px);border:1px solid #ffffff24;background:#ffffff12;color:#dcecff;border-radius:20px;padding:0 12px;outline:none}
+.clock{position:absolute;right:12px;text-align:right;font-size:10px;color:#e5f1ff;line-height:1.4}
+.panel{display:none;position:absolute;bottom:68px;left:50%;transform:translateX(-50%);width:min(92vw,410px);max-height:70vh;overflow:auto;padding:17px;border:1px solid #ffffff28;border-radius:18px;background:#172638ed;backdrop-filter:blur(20px);box-shadow:0 15px 50px #0008}
+.panel h2{font-weight:500;margin:0 0 13px;font-size:18px}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.app{padding:13px 5px;border:0;border-radius:12px;background:#ffffff10;color:#fff;text-align:center;font-size:11px}
 .app b{display:block;font-size:24px;margin-bottom:6px}
-.toast{position:absolute;top:20px;right:18px;background:#172638ed;padding:10px 14px;border-radius:12px;font-size:12px;display:none}
-@media(max-width:420px){.icons{left:10px}.icon{width:64px}.clock{display:none}.taskbar{gap:7px}}
+.fileline{padding:12px;background:#ffffff10;border-radius:10px;margin-top:10px;font-size:12px;overflow-wrap:anywhere}
+.close{float:right;background:#ffffff18;color:white;border:0;border-radius:8px;padding:6px 10px}
+.toast{position:absolute;top:18px;right:14px;background:#172638ed;padding:10px 14px;border-radius:12px;font-size:12px;display:none;max-width:80vw}
+.trackpad{display:none;position:absolute;right:16px;bottom:76px;width:min(42vw,190px);height:120px;border:1px solid #ffffff55;border-radius:16px;background:#14243bbd;touch-action:none;align-items:center;justify-content:center;color:#cfe5ff;font-size:12px}
+.cursor{display:none;position:absolute;z-index:10;font-size:22px;pointer-events:none;filter:drop-shadow(0 2px 3px #000)}
+@media(max-width:420px){.icons{left:8px}.icon{width:62px}.clock{display:none}.taskbar{gap:6px}.trackpad{height:105px}}
 </style>
 </head>
 <body>
-<div class="desktop">
+<div class="desktop" id="desktop">
 <div class="glow"></div>
-<div class="brand">POCKET PC <small style="opacity:.6"> • PREVIEW 0.1</small></div>
+<div class="brand">POCKET PC <small style="opacity:.6"> • PHASE 2</small></div>
 <div class="icons">
-  <div class="icon" onclick="notify('This PC is part of the desktop preview.')"><span>🖥️</span>This PC</div>
-  <div class="icon" onclick="notify('File Explorer module is planned for the next phase.')"><span>📁</span>Files</div>
-  <div class="icon" onclick="notify('Settings module is coming in a later phase.')"><span>⚙️</span>Settings</div>
-  <div class="icon" onclick="notify('Terminal module is planned for a later phase.')"><span>⌨️</span>Terminal</div>
+ <div class="icon" onclick="openExplorer()"><span>📁</span>File Explorer</div>
+ <div class="icon" onclick="notify('Settings module will be added in a later phase.')"><span>⚙️</span>Settings</div>
+ <div class="icon" onclick="toggleTrackpad()"><span>🖱️</span>Touch Mouse</div>
+ <div class="icon" onclick="notify('Windows EXE execution is not implemented yet.')"><span>💿</span>EXE Installer</div>
 </div>
-<div class="center"><div class="welcome"><h1>Welcome</h1><p>Your pocket-sized desktop experience</p></div></div>
+<div class="center"><div class="welcome"><h1>Welcome</h1><p>POCKET PC · Phase 2 desktop</p></div></div>
+
 <div id="startPanel" class="panel">
-  <h2>Start</h2>
-  <div class="apps">
-    <div class="app" onclick="notify('File Explorer is not connected yet.')"><b>📁</b>Explorer</div>
-    <div class="app" onclick="notify('Terminal is not connected yet.')"><b>⌨️</b>Terminal</div>
-    <div class="app" onclick="notify('Settings are coming soon.')"><b>⚙️</b>Settings</div>
-    <div class="app" onclick="notify('App launcher module is coming soon.')"><b>🧩</b>Apps</div>
-    <div class="app" onclick="notify('This preview does not run Windows EXE files.')"><b>💿</b>Install EXE</div>
-    <div class="app" onclick="notify('Power controls are simulated in this preview.')"><b>⏻</b>Power</div>
-  </div>
+ <h2>Start <button class="close" onclick="closePanels()">Close</button></h2>
+ <div class="apps">
+  <button class="app" onclick="openExplorer()"><b>📁</b>File Explorer</button>
+  <button class="app" onclick="toggleTrackpad()"><b>🖱️</b>Touch Mouse</button>
+  <button class="app" onclick="notify('Settings are coming soon.')"><b>⚙️</b>Settings</button>
+  <button class="app" onclick="notify('Windows EXE support is not available yet.')"><b>💿</b>Install EXE</button>
+  <button class="app" onclick="notify('Terminal integration is planned for a later phase.')"><b>⌨️</b>Terminal</button>
+  <button class="app" onclick="notify('Power controls are simulated in this preview.')"><b>⏻</b>Power</button>
+ </div>
 </div>
+
+<div id="explorerPanel" class="panel">
+ <h2>File Explorer <button class="close" onclick="closePanels()">Close</button></h2>
+ <p style="font-size:12px;color:#c5d8eb">Choose a file from Android storage using the system picker.</p>
+ <button class="app" style="width:100%" onclick="pickFile()"><b>📂</b>Browse Android files</button>
+ <div class="fileline" id="selectedFile">No file selected</div>
+ <p style="font-size:10px;color:#9eb6ce">Phase 2 opens Android's document picker. It does not yet provide a full Windows filesystem or run selected files.</p>
+</div>
+
+<div class="trackpad" id="trackpad">Touch here to move pointer</div>
+<div class="cursor" id="cursor">➤</div>
 <div id="toast" class="toast"></div>
 <div class="taskbar">
-  <button class="start" onclick="toggleStart()" aria-label="Start">⊞</button>
-  <input class="search" placeholder="Search" readonly onclick="notify('Search will be added in a later phase.')">
-  <button class="taskicon" onclick="notify('File Explorer is coming soon.')">📁</button>
-  <button class="taskicon" onclick="notify('Browser shortcut placeholder.')">🌐</button>
-  <div class="clock"><span id="time">--:--</span><br><span id="date">--</span></div>
+ <button class="start" onclick="toggleStart()" aria-label="Start">⊞</button>
+ <input class="search" placeholder="Search" readonly onclick="notify('Search will be added later.')">
+ <button class="taskicon" onclick="openExplorer()">📁</button>
+ <button class="taskicon" onclick="toggleTrackpad()">🖱️</button>
+ <div class="clock"><span id="time">--:--</span><br><span id="date">--</span></div>
 </div>
 </div>
 <script>
-function toggleStart(){const p=document.getElementById('startPanel');p.style.display=p.style.display==='block'?'none':'block'}
-function notify(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2300)}
+function closePanels(){document.getElementById('startPanel').style.display='none';document.getElementById('explorerPanel').style.display='none'}
+function toggleStart(){const p=document.getElementById('startPanel');const show=p.style.display!=='block';closePanels();p.style.display=show?'block':'none'}
+function openExplorer(){closePanels();document.getElementById('explorerPanel').style.display='block'}
+function pickFile(){if(window.PocketPC&&PocketPC.openAndroidFilePicker)PocketPC.openAndroidFilePicker();else notify('Android file picker unavailable.')}
+function onPocketFileSelected(name){document.getElementById('selectedFile').textContent='Selected: '+name;openExplorer()}
+function notify(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2500)}
+function toggleTrackpad(){const p=document.getElementById('trackpad');p.style.display=p.style.display==='flex'?'none':'flex'}
+const pad=document.getElementById('trackpad'),cur=document.getElementById('cursor');
+let px=innerWidth/2,py=innerHeight/2;
+pad.addEventListener('pointerdown',e=>{pad.setPointerCapture(e.pointerId);move(e)});
+pad.addEventListener('pointermove',e=>{if(e.buttons)move(e)});
+function move(e){const r=pad.getBoundingClientRect();px=Math.max(2,Math.min(innerWidth-24,px+(e.movementX||0)*1.7));py=Math.max(2,Math.min(innerHeight-70,py+(e.movementY||0)*1.7));cur.style.display='block';cur.style.left=px+'px';cur.style.top=py+'px'}
 function updateClock(){const d=new Date();document.getElementById('time').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=d.toLocaleDateString()}
 updateClock();setInterval(updateClock,1000);
-document.addEventListener('click',e=>{if(!e.target.closest('.start')&&!e.target.closest('#startPanel'))document.getElementById('startPanel').style.display='none'});
+document.addEventListener('click',e=>{if(!e.target.closest('.start')&&!e.target.closest('#startPanel')&&!e.target.closest('#explorerPanel')&&!e.target.closest('.icon'))document.getElementById('startPanel').style.display='none'});
 </script>
 </body>
 </html>
